@@ -58,9 +58,9 @@ public class LevelGenerator {
         return levelGenerator.createLevel(seed, difficulty, type);
     }
 
-    private int width;
-    private int height;
-    Level level = new Level(width, height);
+    protected int width;
+    protected int height;
+    protected Level level = new Level(width, height);
     Random random;
 
     private static final int ODDS_STRAIGHT = 0; //0
@@ -87,6 +87,10 @@ public class LevelGenerator {
         this.width = width;
         this.height = height;
         //System.out.println("Instanciou minha classe!!! :p");
+    }
+    protected LevelGenerator()
+    {
+    	
     }
     
     /**
@@ -1585,7 +1589,7 @@ public class LevelGenerator {
          */
     }
 
-    private void fixWalls()
+    protected void fixWalls()
     {
         boolean[][] blockMap = new boolean[width + 1][height + 1];
         for (int x = 0; x < width + 1; x++)
@@ -2919,7 +2923,7 @@ public class LevelGenerator {
     
     
     
-    private Level retornaTela(Level level, String nomeTela){    	
+    protected Level retornaTela(Level level, String nomeTela){    	
     	
     	FileInputStream fis;
 		try {
