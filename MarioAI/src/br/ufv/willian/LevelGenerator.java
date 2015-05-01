@@ -365,7 +365,7 @@ public class LevelGenerator {
             
 		case 7:
 			//Retornando tela espec�fica
-			level = retornaTela(level, "TodasTelas/Telas/" + "tela1599");
+			level = retornaTela(level, "TelasSelecionadas/Telas/" + "tela1599");
 			fixWalls();
 			return level;
 		case 8:

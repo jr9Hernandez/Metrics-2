@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.io.*;
 import java.util.ArrayList;
 
+import weka.core.WeightedInstancesHandler;
 import br.ufv.willian.auxiliares.SpriteTemplatePrimitivo;
-
 import dk.itu.mario.MarioInterface.LevelInterface;
 import dk.itu.mario.engine.sprites.SpriteTemplate;
 
@@ -376,6 +376,7 @@ public class Level implements LevelInterface, Serializable
 			System.out.println();
 		}
     }
+    
     
     public void setxExit(int x){
     	xExit = x;
