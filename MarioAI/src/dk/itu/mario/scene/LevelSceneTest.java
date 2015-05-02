@@ -78,7 +78,8 @@ public class LevelSceneTest extends LevelScene {
 				//currentLevel = (Level) level.generateLevel(gp);				
 			    currentLevel = LevelGenerator.createLevel(320, 15, levelSeed, levelDifficulty, levelType);
 				Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
-				currentLevel=objMetrics.MetricsCalc(1);
+				objMetrics.MetricsCalc(1);
+				objMetrics.MetricsCalc(2);
 			} else
 				currentLevel = new RandomLevel(320, 15, levelSeed, levelDifficulty, levelType);
 				
