@@ -29,6 +29,9 @@ public class Metrics extends LevelGenerator {
 		case 2:
 			Metric2 objMetric2= new Metric2(width, height, level);
 			return objMetric2.Metric2M();
+		case 3:
+			Metric3 objMetric3= new Metric3(width, height, level);
+			return objMetric3.Metric3M();
 		}
 		return 0;
 	}

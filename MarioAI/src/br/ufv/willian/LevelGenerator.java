@@ -316,7 +316,7 @@ public class LevelGenerator {
     	
     	*/
     	
-    	gerador = 1;
+    	gerador = 7;
     	
     	
     	switch (gerador) {

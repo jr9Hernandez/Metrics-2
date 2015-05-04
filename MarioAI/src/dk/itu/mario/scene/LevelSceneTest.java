@@ -80,6 +80,7 @@ public class LevelSceneTest extends LevelScene {
 				Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
 				objMetrics.MetricsCalc(1);
 				objMetrics.MetricsCalc(2);
+				objMetrics.MetricsCalc(3);
 			} else
 				currentLevel = new RandomLevel(320, 15, levelSeed, levelDifficulty, levelType);
 				
