@@ -21,7 +21,42 @@ public class Metrics extends LevelGenerator {
 	}
 	public Metrics(){}
 
+
+	
 	public double MetricsCalc(int metric) {
+		
+		Level leveltoCompare = new Level();
+		try {
+			leveltoCompare=level.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+/*
+    	leveltoCompare.setSpriteTemplate(0, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(6, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(12, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(18, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(24, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(32, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(38, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(40, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(48, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(49, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(56, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(60, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
+    	leveltoCompare.setSpriteTemplate(61, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(62, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(63, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(64, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setSpriteTemplate(65, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
+    	leveltoCompare.setMap(0, 8, (byte) (0 + 1 * 16));
+    	leveltoCompare.setMap(6, 8, (byte) (0 + 1 * 16));
+    	leveltoCompare.setMap(12, 8, (byte) (0 + 1 * 16));
+    	leveltoCompare.setMap(14, 8, (byte) (0 + 1 * 16));
+    	leveltoCompare.setMap(16, 8, (byte) (0 + 1 * 16));
+    	leveltoCompare.setMap(18, 8, (byte) (0 + 1 * 16));	*/
+		
 		switch (metric) {
 		case 1:
 			Metric1 objMetric1= new Metric1(width, height, level);
@@ -31,7 +66,11 @@ public class Metrics extends LevelGenerator {
 			return objMetric2.Metric2M();
 		case 3:
 			Metric3 objMetric3= new Metric3(width, height, level);
-			return objMetric3.Metric3M();
+			return objMetric3.Metric3M();		
+	    case 4:
+		    Metric4 objMetric4= new Metric4(width, height, level, leveltoCompare);
+		    return objMetric4.Metric4M();
+
 		}
 		return 0;
 	}
