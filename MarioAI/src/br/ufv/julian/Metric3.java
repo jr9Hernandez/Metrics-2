@@ -8,8 +8,8 @@ public class Metric3 {
 	private int height;
 	Level level;
 	int counterHills;
-	int sumaHills;
-	double avgHills;
+	double sumaHills=0;
+	double avgHills=0;
 	
 public Metric3(int width, int height, Level level) {
 		
@@ -58,5 +58,8 @@ public void countOtherElements(byte[][] array) {
 		sumaHills=sumaHills+counterHills;
 		}
 	avgHills=sumaHills/width;
+	System.out.println("sum"+sumaHills);
+	System.out.println("width"+width);
+	System.out.println("avg"+avgHills);
 	}
 }

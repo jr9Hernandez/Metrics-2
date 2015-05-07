@@ -26,12 +26,18 @@ public class Metric1  {
 	}
 	
 	public double Metric1M() {
-		System.out.println("almenos entro?"+level.getMap().length);
 		countOtherElements(level.getMap());
 		// level.setSpriteTemplate(0, 0, new
 		// SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
 		countEnemies(level.getMap());
 
+		//Testando quantity of each thing
+		System.out.println("levelElements[levelElementsGaps] "+levelElements[levelElementsGaps]);
+		System.out.println("levelElements[levelElementsAvGaps] "+levelElements[levelElementsAvGaps]);
+		System.out.println("levelElements[levelElementsEnemies] "+levelElements[levelElementsEnemies]);
+		System.out.println("levelElements[levelElementsCannnFlowers] "+levelElements[levelElementsCannnFlowers]);
+		System.out.println("levelElements[levelElementsPowerUps] "+levelElements[levelElementsPowerUps]);
+		//end test
 		// Setting the weights of elements
 		levelElements[levelElementsGaps] = levelElements[levelElementsGaps]
 				* -0.5;

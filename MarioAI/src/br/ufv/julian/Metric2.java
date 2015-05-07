@@ -126,14 +126,14 @@ public class Metric2 {
 		}
 			
 			
-		/*test del vector
+//		test del vector
 		for(int i=0; i< width;i++)
 		{
 			
 				System.out.print(levelElementsx[i]+" ");
 				System.out.print(levelElementsy[i]);
 			    System.out.println("");
-		}*/
+		}
 	}	
 
 	public void linearRegresion(double[] x, double[] y)
