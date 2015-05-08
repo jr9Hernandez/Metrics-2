@@ -106,9 +106,11 @@ public class Metric1  {
 			}
 
 		}
+		if(levelElements[levelElementsGaps]!=0)
+		{
 		levelElements[levelElementsAvGaps] = levelElements[levelElementsAvGaps]
 				/ levelElements[levelElementsGaps];
-
+		}
 	}
 
 	public void countEnemies(byte[][] array) {
