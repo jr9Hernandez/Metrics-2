@@ -80,13 +80,13 @@ public class LevelSceneTest extends LevelScene {
 				
 				
 				
-				//ReadXsl objRead=new ReadXsl();
-				//objRead.reading(320, 15, levelSeed, levelDifficulty, levelType);
+				ReadXsl objRead=new ReadXsl();
+				objRead.reading(320, 15, levelSeed, levelDifficulty, levelType);
 			    currentLevel = LevelGenerator.createLevel(320, 15, levelSeed, levelDifficulty, levelType);
-			    System.out.println("El width é"+currentLevel.getWidth());
-				Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
+			    //System.out.println("El width é"+currentLevel.getWidth());
+				//Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
 				//objMetrics.MetricsCalc(1);
-				objMetrics.MetricsCalc(2);
+				//objMetrics.MetricsCalc(2);
 				//objMetrics.MetricsCalc(3);
 				//objMetrics.MetricsCalc(4);
 			} else

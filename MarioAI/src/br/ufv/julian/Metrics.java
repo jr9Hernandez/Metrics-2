@@ -83,7 +83,7 @@ public class Metrics extends LevelGenerator {
 		int last=0;
 		for (int i = width-1; i >= 0; i--) {
 			
-			System.out.println("terruño");
+			
 				if(level.getMap()[i][height-1]!= (byte) (0))
 				{
 					break;
