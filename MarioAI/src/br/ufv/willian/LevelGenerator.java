@@ -57,6 +57,12 @@ public class LevelGenerator {
         LevelGenerator levelGenerator = new LevelGenerator(width, height);
         return levelGenerator.createLevel(seed, difficulty, type);
     }
+    public static Level createLevelMetrics(int width, int height, long seed, int difficulty, int type, int gerador, String [] tiles)
+    {
+    	//type = TYPE_OVERGROUND;
+        LevelGenerator levelGenerator = new LevelGenerator(width, height);
+        return levelGenerator.createLevelMetrics(seed, difficulty, type, gerador,tiles);
+    }
 
     protected int width;
     protected int height;
@@ -316,7 +322,7 @@ public class LevelGenerator {
     	
     	*/
     	
-    	gerador = 7;
+    	gerador = 2;
     	
     	
     	switch (gerador) {
@@ -3054,6 +3060,510 @@ public class LevelGenerator {
 			dificuldade = (int)equacaoPrincipal.resultadoFuncao(i);
 			//nomeTela = (medidor.retornaTelaEspecifica(dificuldade, nomeTelas));
 			nomeTelas.add(medidor.retornaTelaEspecifica(dificuldade, nomeTelas));
+			System.out.print(i + ": " + nomeTelas.get(i) + "(" + dificuldade +")   " );
+		}
+    	//System.out.println();
+    	
+    	DadosFormulario salvaTelasFase = DadosFormulario.getInstancia();
+		salvaTelasFase.setListaTelasFase(nomeTelas);
+		
+		//ArrayList lista = salvaTelasFase.getListaTelasFase();
+		/*
+		 System.out.print("FASE salva no Formulario de Dados: ");
+		for (int i=0; i< medidor.getQuantidadeTelas(); i++){
+			System.out.print(lista.get(i) + " ");
+		}
+    	System.out.println();
+    	*/
+    	ConectorDeTelas fase = new ConectorDeTelas();	
+    	//fase.lerArquivosDiretorio(nomeTelas);
+    	ArrayList<Level> listaTelas = new ArrayList<Level>();
+    	String diretorio = "";
+    	
+    	FileInputStream fis;
+    	
+		try {
+			for(int i=0;i < nomeTelas.size(); i++){
+				//diretorio = "telasEinfo/Telas/" + nomeTelas.get(i);
+				diretorio = "TelasSelecionadas/Telas/" + nomeTelas.get(i);
+				fis = new FileInputStream(diretorio);
+				DataInputStream dis = new DataInputStream(fis);
+				//System.out.print(nomeTelas.get(i) + " ");
+				//Level level2 = Level.load(dis);
+				listaTelas.add(Level.load(dis));
+			}
+			System.out.println();
+			
+			return fase.conectaTelas(listaTelas);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   		
+    	    		
+    		//***************************************************
+        System.out.println("Retornando Default");	
+		return conectaTelas(level);       	
+        
+    }
+
+    private Level createLevelMetrics(long seed, int difficulty, int type, int gerador, String [] tiles)
+    {   
+    	DadosFormulario dados = DadosFormulario.getInstancia();
+    	if(dados.getIdioma()== "Ingles"){
+    		msg = "Thanks for participating.";
+    	}
+    	else{
+    		msg = "Obrigado pela participação."; 
+    	}
+
+    	//VariaveisGlobais.testando = true;
+    	if(VariaveisGlobais.testando){    		
+    		random = new Random();
+			seed = random.nextInt(Integer.MAX_VALUE);
+			difficulty = 3 + random.nextInt(4);
+			//System.out.println("!!! Fase de Teste !!!\n" + "seed: " + seed + " difficulty: " + difficulty +"\n");
+			return level = new RandomLevel(220, 15, seed, difficulty, type);    		
+			//return level = new RandomLevel(94, 15, seed, difficulty, type);
+    	}
+    	
+    	//level = createLevelOriginal(seed, difficulty, type);
+        /*        
+        salvaTela(level, "tela2"); //Teste ado metodo que salva a tela
+        salvaInfoTela(level);
+        */
+        //level = conectaTelas(level);        
+        //level =  retornaTela(level, "tela2");
+        //level = controiLevel(level);
+        //level = controiLevelPorFuncao(level);
+    	//EquacaoFases equacao = new Parabola(-1/8, 3/3, 3);
+    	//DadosFormulario dados = DadosFormulario.getInstancia();
+    	//DadosFormulario dados = DadosFormulario.getInstancia();
+    	EquacaoFases equacao = null;
+    	VariaveisGlobais.num_mortes = 0; //Numero de vezes que o usuario morreu nesta tela
+    	//Random randon = new Random();
+    	//int x = randon.nextInt(4);
+    	int x = VariaveisGlobais.cont % VariaveisGlobais.quant_geradores;
+    	//if(x == 0){
+    		//VariaveisGlobais.gerador = GeraSequenciaAleatoria.geraSequencia(VariaveisGlobais.quant_geradores);
+    		
+    		//for(int i = 0; i < VariaveisGlobais.quant_geradores; i++)
+    			//System.out.print(VariaveisGlobais.gerador[i] + " ");
+    		//System.out.println("\n");
+    	//}
+    	
+    	
+    	
+    	VariaveisGlobais.morreuEm = -1;
+    	//gerador = VariaveisGlobais.gerador[x];
+    	//VariaveisGlobais.cont++; //Incrementa o contador para as proximas fases
+    	
+    	
+    	/*
+    	VetorFasesPartida partidas = new VetorFasesPartida();
+    	try {
+			partidas = partidas.carregaVetorFases("partidas");
+		} catch (ClassNotFoundException | IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		if(partidas.size() == 0){
+			try {
+				
+				ArrayList<String> fases = new ArrayList<String>();
+				//fases.add("0");
+				fases.add("1");
+				fases.add("2");
+				//fases.add("3");
+				fases.add("4");
+				fases.add("5");
+				
+				partidas.constroiVetorTelas(fases);
+				ClassePartidas aux;
+				System.out.println("Partidas montadas\n");
+				for(int i=0; i < partidas.size(); i ++){
+					aux = partidas.get(i);
+					System.out.println(aux.fase1 +" x " + aux.fase2);
+				}
+				System.out.println();
+				partidas.salvaVetorFases("partidas");
+			} catch (ClassNotFoundException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}		
+		
+		
+		if(VariaveisGlobais.fase == 0){
+			VariaveisGlobais.partidas = partidas.remove(0);
+			try {
+				partidas.salvaVetorFases("partidas");
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		VariaveisGlobais.fase++;
+		
+		if(VariaveisGlobais.fase == 1)
+			gerador = VariaveisGlobais.partidas.fase1;
+		else{
+			gerador = VariaveisGlobais.partidas.fase2;
+			VariaveisGlobais.fase = 0;
+		}
+			
+    	
+		System.out.println(VariaveisGlobais.partidas.fase1 + " x " + VariaveisGlobais.partidas.fase2);
+		System.out.println("JOGANDO: " + gerador + "\n");
+		dados.setPartida(VariaveisGlobais.partidas.fase1 + " x " + VariaveisGlobais.partidas.fase2);
+    	*/
+    	
+    	/*
+    	gerador = VariaveisGlobais.gerador[VariaveisGlobais.nada];
+    	VariaveisGlobais.nada++;
+    	
+    	if(VariaveisGlobais.nada > 2)
+    		VariaveisGlobais.nada = 0;
+    	*/
+    	/*
+    	Scanner s = new Scanner(System.in);
+    	while(gerador < 0 || gerador > 5){
+    		System.out.print("\nDigite a opï¿½ï¿½o da funï¿½ï¿½o desejada: " +
+    				"\n\t(0) Constante - dificuldade 5" +
+    				"\n\t(1) Parabola - -0.25x^2 + 3x + 4" +
+    				"\n\t(2) Aleatï¿½rio - RandomLevel" +
+    				"\n\t(3) Linear decrescente - -1,1x + 13" +
+    				"\n\t(4) Peter - PeterLevelGenerator" +
+    				"\n\t(5) Glen Takahashi - UltraCustomizedLevelGenerator"+
+    				"\nSua opï¿½ï¿½o: ");
+    		gerador = s.nextInt();
+    		if(gerador < 0 || gerador > 5)
+    			System.out.println("Opcï¿½o Invï¿½lida!");
+    		
+    	}
+    	*/
+    	
+    	
+    	//************************ IMPORTANTE **************************************
+    	
+    	/*
+    	
+    	VetorSequencia sequencia = new VetorSequencia();
+    	File file = new File("sequencia.txt");
+    	if(file.exists()){
+	    	try {
+				sequencia = sequencia.carregaVetorSequencia("sequencia.txt");
+				if(sequencia.size() == 0){
+					//String msg = "<html>Thanks for participating.<br>Your participation id is:<br>"+ dados.getUser() + "</html>";
+		    		//JOptionPane.showMessageDialog(null,msg,"", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, msg,"", JOptionPane.INFORMATION_MESSAGE);
+					System.exit(0);
+					//System.out.println("End");
+		    		//IdClasse.main(null);
+		    		//System.in.read();
+		    		//return null;
+				}
+			} catch (ClassNotFoundException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+	    	catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+			}
+    	}
+    	
+    	dados.setQuadradoLatino(1);
+    	
+    	if(sequencia.size() == 0){    		
+    		sequencia.montaVetorSequencia(dados.getQuadradoLatino()); 
+    		
+    	}    
+    	
+    	gerador = sequencia.remove(0);  
+    	//sequencia.remove(0);
+    	//sequencia.remove(0);
+    	//sequencia.remove(0);
+    	    	
+    	
+    	try {
+			sequencia.salvaVetorSequencia("sequencia.txt");
+		} catch (ClassNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+    	
+    	//********************************************
+    	//gerador = 1;
+    	System.out.println("Jogando: " + gerador);
+    	
+    	dados.setPartida(gerador);
+    	
+    	*/
+    	
+    	//gerador = 7;
+    	
+    	
+    	switch (gerador) {
+		case 0:
+			equacao = new Parabola(0, 0, 2);
+			dados.setEquacao("Parabola(0, 0, 5)");			
+			break;		
+		case 1:
+			//equacao = new Parabola(-0.25 , 3 , 4);
+			//dados.setEquacao("-0.25x^2 + 3x + 4");
+			//-0.25x^2 + 2.8x + 1
+			//equacao = new Parabola(-0.25, 2.8, 1);
+			//dados.setEquacao("-0.25x^2 + 2.8x + 2");
+			equacao = new EquacaoEspecial(0, 1, 1);
+			dados.setEquacao("EquacaoEspecial(0, 1, 1)");
+			break;
+		case 2:
+			random = new Random();
+			//seed = random.nextInt(Integer.MAX_VALUE);
+			//difficulty = 3 + random.nextInt(3);
+			dados.setEquacao("RandomLevel("+ seed + ", " + difficulty + ", " + type +")");
+			//System.out.println(dados.getEquacao());
+			return level = new RandomLevel(220, 15, seed, difficulty, type);  //RandomLevel(320, 15, seed, difficulty, type);			
+		case 3:
+			//equacao = new Parabola(0, -1.1, 13); 
+			//dados.setEquacao("Parabola(0, -1,1, 13)");
+			equacao = new EquacaoRandomica();
+			dados.setEquacao("EquacaoRandomica()");
+			break;
+		case 4:
+			//width = 60;
+			dados.setEquacao("PeterLevelGenerator()");
+			//System.out.println(dados.getEquacao());
+			petermawhorter.PeterLevelGenerator clg = new PeterLevelGenerator();
+    		GamePlay gp = new GamePlay();
+    		gp = gp.read("player.txt");
+            return (Level)clg.generateLevel(gp);   	
+		
+		case 5:
+			glentakahashi.generator.UltraCustomizedLevelGenerator uclg= new UltraCustomizedLevelGenerator();
+			GamePlay gp2 = new GamePlay();
+    		gp2 = gp2.read("player.txt");
+    		dados.setEquacao("UltraCustomizedLevelGenerator()");
+    		//System.out.println(dados.getEquacao());
+            return (Level)uclg.generateLevel(gp2);
+            
+		case 7:
+			//Retornando tela especï¿½fica
+			level = retornaTela(level, "TelasSelecionadas/Telas/" + "tela1599");
+			fixWalls();
+			return level;
+		case 8:
+			VetorTelasParaTeste telas = new VetorTelasParaTeste();
+			try {
+				telas = telas.carregaVetorTelas("vetorTelas");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(telas.size() == 0)
+				try {
+					telas.constroiVetorTelas();
+					telas.salvaVetorTelas("vetorTelas");
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			
+			String nome = telas.get(0);
+			System.out.println(nome);
+			//for(int i=0; i < (telas.size()) - 2; i++)
+				//System.out.println("Removido: " + telas.remove(0));
+			System.out.println("Nao avaliadas: " + telas.size());
+			
+			
+			level = retornaTela(level, "TelasSelecionadas/Telas/" + nome);
+			DadosAvaliacaoTelas dadosTelas = DadosAvaliacaoTelas.getInstancia();
+			dadosTelas.setTela(nome);
+			fixWalls();			
+			return level;
+		case 9:
+			level = conectaTelas(level);
+			width = level.getxExit() + 64;
+			//System.out.println("Width: " + width);
+			fixWalls();
+			
+			//corrigeFase(level);
+			return level;
+		case 10:
+			difficulty = (int) (Math.random () * 8);
+			level = createLevelOriginal(seed, difficulty, type);			        
+			System.out.println("\ncreateLevelOriginal(" + seed + ", " + difficulty + ", " + type + ");");
+			int cont = 0;
+			for (int xi = 0; xi < level.getWidth(); xi++) {
+				for(int y = 0; y < level.getHeight(); y++){
+					if(level.getBlock(xi, y) == (byte) (4 + 2 + 1 * 16) || //Block PowerUp 
+					   level.getBlock(xi, y) == (byte) (2 + 1 * 16)//Bloco amarelo com PowerUp
+					){
+						cont++;
+						//System.out.println("PowerUp em " + xi + ", " + y);
+					}
+				}				
+			}
+			
+			//System.out.println("Quantidade de PowerUp: " + cont);
+			return level;
+		case 11: //salva a Tela
+			
+			VariaveisGlobais.tag_platform = false;
+			VariaveisGlobais.tag_straigth = false;
+			VariaveisGlobais.tag_hill_straigth = false;
+			VariaveisGlobais.tag_tubes = false;
+			VariaveisGlobais.tag_jump = false;
+			VariaveisGlobais.tag_cannos = false;
+			
+			//width = 89;
+			//level = new Level(width, 15);
+			level = createLevelTela(seed, difficulty, type);
+	        salvaTela(level, "tela");
+	        salvaInfoTela(level);
+	        //fixWalls();
+	        return level;
+		}   
+    	
+    	//System.out.println(dados.getEquacao());   	
+    	level = controiLevelPorFuncaoMetrics(level, equacao,tiles);
+		width = level.getxExit() + 64;
+		
+		//level.setBlock(1, 5, (byte) 28); //bloco azul-rocheado
+		//level.setBlock(1, 5, (byte) 9); //bloco rocha cinza
+		//level.setBlock(2, 5, (byte) 12); //bloco de madeira		
+		/*
+		 *  //bandeirinha na entrada indicando o caminho
+		    level.setBlock(0, floor-2, (byte) 67);
+    		level.setBlock(0, floor-1, (byte) 83);
+    		level.setBlock(1, floor-2, (byte) 68);
+    		level.setBlock(1, floor-1, (byte) 84);
+		/* */
+			
+		
+		//byte block_marron = (byte) (1 + 9 * 16); //bloco marron
+		byte moeda = (byte) 32; //moeda
+		//int inicio = 0, fim = 0;
+		for(int xi = 0; xi < level.getWidth(); xi++){
+			for (int y = 1; y < 8; y++) {
+				if(level.getBlock(xi, y) != (byte)0 && level.getBlock(xi, y) != moeda){
+					int y0 = 0;
+					if(y - 5 > 0)
+						y0 = y - 4;
+					//System.out.println("Bloco nï¿½o vazio em " + xi + ", " + y);
+					int yi = y;
+					if(yi > 3)
+						yi--;
+					for(int z= y0; z < yi; z++){
+						if(level.getBlock(xi, z) == (byte)0)
+							level.setBlock(xi, z, moeda);
+					}
+					y=8;
+					//break;
+					//for(in)
+					
+					
+					//System.out.println("PowerUp em " + xi + ", " + y);
+				}
+			}
+			//level.setBlock(xi, 5, moeda);
+		}
+		
+		//Adicionar um cogumelo		
+		int cont = 0;
+		for (int xi = 0; xi < 100; xi++) {
+			for(int y = 0; y < level.getHeight(); y++){
+				if(level.getBlock(xi, y) == (byte) (4 + 2 + 1 * 16) || //Block PowerUp 
+				   level.getBlock(xi, y) == (byte) (2 + 1 * 16)//Bloco amarelo com PowerUp
+				){
+					cont++;
+					//System.out.println("PowerUp em " + xi + ", " + y);
+				}
+			}				
+		}
+		
+		//System.out.println("Quantidade de PowerUp: " + cont);
+		
+		if(cont < 1){
+			random = new Random();
+			int xi = random.nextInt(100) + 1;
+			int y;
+			byte block_ant = (byte) (1 + 9 * 16); //bloco marron
+			for(; xi > 0; xi--)
+			for(y = level.getHeight(); y > 4; y--){
+				if(level.getBlock(xi, y) == 0 && level.getBlock(xi, y + 1) == block_ant){
+					if(level.getBlock(xi,  y - 3) == 0 && level.getBlock(xi - 1,  y - 3) == 0 &&
+							level.getBlock(xi + 1,  y - 3) == 0){
+						//level.setBlock(xi - 1,  y - 3, (byte) 28); //bloco azul-rocheado
+						level.setBlock(xi,  y - 3, (byte) (4 + 2 + 1 * 16));
+						//level.setBlock(xi + 1,  y - 3, (byte) 12); //bloco de madeira
+						//System.out.println("Inserido PowerUp em " + xi + ", " + (y-3));
+						xi = 0;
+						break;
+					}else break;
+				}
+			}
+			
+			
+			
+		}			
+        //corrigeFase(level);
+    	fixWalls();
+        
+        //System.out.println("Level com equacao " + dados.getEquacao());
+    	return level;
+    	
+        
+    }
+    
+    private Level controiLevelPorFuncaoMetrics(Level level, EquacaoFases equacaoPrincipal, String [] tiles){
+    	
+    	//System.out.println("Valores da funcao: \na: " + equacaoPrincipal.getA() + " b: " + equacaoPrincipal.getB() + " c: " + equacaoPrincipal.getC());
+    	
+    	ArrayList<String> nomeTelas = new ArrayList<String>();
+    	MedidorDeDificuldade medidor = new MedidorDeDificuldade();
+    	
+    	try {
+			//medidor.montaTabelaDificuldade();
+    		medidor = medidor.carregaTabelaTelas("");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		    	
+    	
+    	int dificuldade;
+    	//ClassEquacoes funcao = new ClassEquacoes();
+    	//EquacaoFases equacao = new Parabola(-1/8, 3/3, 3);  /*-x^2/8 + 3x//2 + 3 */ equacaoPrincipal
+    	//EquacaoFases equacao = equacaoPrincipal;   	
+    	
+    	//System.out.print("FASE: ");
+    	//String nomeTela = "";
+    	
+		//for (int i=0; i< medidor.getQuantidadeTelas(); i++){
+    	for (int i=0; i < NUM_TELAS_POR_FASE; i++){
+			//dificuldade = (int)equacao.resultadoFuncao(i);
+			dificuldade = (int)equacaoPrincipal.resultadoFuncao(i);
+			//nomeTela = (medidor.retornaTelaEspecifica(dificuldade, nomeTelas));
+			nomeTelas.add(tiles[i]);
 			System.out.print(i + ": " + nomeTelas.get(i) + "(" + dificuldade +")   " );
 		}
     	//System.out.println();

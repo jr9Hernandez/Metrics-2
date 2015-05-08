@@ -24,10 +24,7 @@ public class Metrics extends LevelGenerator {
 
 	
 	public double MetricsCalc(int metric) {
-		
-		//reading xls
-		ReadXsl objReadxls=new ReadXsl();
-		objReadxls.reading();
+
 		
 		Level leveltoCompare = new Level();
 		try {

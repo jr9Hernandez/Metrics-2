@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import br.ufv.julian.Metrics;
+import br.ufv.julian.ReadXsl;
 import br.ufv.willian.LevelGenerator;
 import br.ufv.willian.WillianLevelGenerator;
 import br.ufv.willian.auxiliares.VariaveisGlobais;
@@ -75,10 +76,15 @@ public class LevelSceneTest extends LevelScene {
 
 				// Instanciando minha classe LevelMap :^D
 				//PetLevelGenerator level = new PetLevelGenerator();
-				//currentLevel = (Level) level.generateLevel(gp);				
+				//currentLevel = (Level) level.generateLevel(gp);		
+				
+				
+				
+				ReadXsl objRead=new ReadXsl();
+				objRead.reading(320, 15, levelSeed, levelDifficulty, levelType);
 			    currentLevel = LevelGenerator.createLevel(320, 15, levelSeed, levelDifficulty, levelType);
-				Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
-				objMetrics.MetricsCalc(1);
+				//Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
+				//objMetrics.MetricsCalc(1);
 				//objMetrics.MetricsCalc(2);
 				//objMetrics.MetricsCalc(3);
 				//objMetrics.MetricsCalc(4);
