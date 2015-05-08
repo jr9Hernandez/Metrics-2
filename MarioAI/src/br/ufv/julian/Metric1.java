@@ -17,6 +17,7 @@ public class Metric1  {
 	private static final int levelElementsPowerUps = 4;
 	private double metric1, nomrMetric1;
 
+	
 	public Metric1(int width, int height, Level level) {
 		
 		this.width = width;
@@ -70,6 +71,11 @@ public class Metric1  {
 	}
 	
 	public void countOtherElements(byte[][] array) {
+		levelElements[levelElementsGaps]=0;
+		levelElements[levelElementsAvGaps]=0;
+		levelElements[levelElementsEnemies]=0;
+		levelElements[levelElementsCannnFlowers]=0;
+		levelElements[levelElementsPowerUps]=0;
 		boolean gap = false;
 		int widthGap = 0;
 		for (int i = 0; i < width; i++) {

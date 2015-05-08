@@ -16,9 +16,10 @@ public class Metrics extends LevelGenerator {
 		this.width = width;
 		this.height = height;
 		this.level = level;
-		
+		this.width =AdjustWidth(width);
 		//Metric2 objMetric2= new Metric2();
 	}
+	
 	public Metrics(){}
 
 
@@ -78,7 +79,25 @@ public class Metrics extends LevelGenerator {
 
 
 
+	private int AdjustWidth(int width) {
+		int last=0;
+		for (int i = width-1; i >= 0; i--) {
+			
+			System.out.println("terruño");
+				if(level.getMap()[i][height-1]!= (byte) (0))
+				{
+					break;
+				}
+				else
+				{
+					last++;
+				}
+				
 
+		}
+		//System.out.println("chamuzer"+last);
+		return width-last;
+	}
 
 
 
