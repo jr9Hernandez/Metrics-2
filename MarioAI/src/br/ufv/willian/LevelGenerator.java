@@ -322,7 +322,7 @@ public class LevelGenerator {
     	
     	*/
     	
-    	gerador = 0;
+    	gerador = 4;
     	
     	
     	switch (gerador) {
@@ -3339,12 +3339,14 @@ public class LevelGenerator {
 			dados.setEquacao("EquacaoRandomica()");
 			break;
 		case 4:
+			System.out.println("aca entramos1");
 			//width = 60;
 			dados.setEquacao("PeterLevelGenerator()");
 			//System.out.println(dados.getEquacao());
 			petermawhorter.PeterLevelGenerator clg = new PeterLevelGenerator();
     		GamePlay gp = new GamePlay();
-    		gp = gp.read("player.txt");
+    		gp = gp.read(tiles[0]);
+    		System.out.println("aca entramos2 "+tiles[0]);
             return (Level)clg.generateLevel(gp);   	
 		
 		case 5:

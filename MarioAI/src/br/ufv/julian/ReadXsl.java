@@ -34,15 +34,18 @@ public class ReadXsl {
 		String[] cadenasSeparadas;
 		int counterTiles = 0;
 		String tipo;
+		int counterPeter =0;
 		try {
-			FileOutputStream fileOut = new FileOutputStream("D:\\MESTRADO2014\\pesquisa2\\otros\\poi-test.xls");
+			FileOutputStream fileOut = new FileOutputStream("D:\\MESTRADO2014\\pesquisa2\\otros\\resultados\\conpeter\\poi-test.xls");
 			InputStream input = new BufferedInputStream(new FileInputStream(
-					"D:\\MESTRADO2014\\pesquisa2\\otros\\arquivo.xls"));
+					"D:\\MESTRADO2014\\pesquisa2\\otros\\resultados\\conpeter\\arquivo.xls"));
 			POIFSFileSystem fs = new POIFSFileSystem(input);
 			HSSFWorkbook wb = new HSSFWorkbook(fs);
 			HSSFSheet sheet = wb.getSheetAt(0);
 			Iterator rows = sheet.rowIterator();
+			
 			while (rows.hasNext()) {
+				
 				HSSFRow row = (HSSFRow) rows.next();
 				row.createCell(18);
 				row.createCell(19);
@@ -89,6 +92,29 @@ public class ReadXsl {
 							
 						} else if (gerador == 3) {
 
+							counterPeter=counterPeter+1;
+							cadenasSeparadas = s.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+							if(counterPeter<28)
+							{
+								cadenasSeparadas[0]="player_mal.txt";
+							}
+							else
+							{
+								cadenasSeparadas[0]="player_bien.txt";
+							}
+							Level currentLevel = new Level();
+							currentLevel = LevelGenerator.createLevelMetrics(
+									width, height,  0, 0, 0, 4,
+									cadenasSeparadas);
+							System.out.println("aca entramos3");
+							Metrics objMetrics = new Metrics(
+									currentLevel.getWidth(),
+									currentLevel.getHeight(), currentLevel);
+							metric1 = objMetrics.MetricsCalc(1);
+							metric2=objMetrics.MetricsCalc(2);
+							metric3=objMetrics.MetricsCalc(3);
+							
+							//metric4=objMetrics.MetricsCalc(4);
 						}
 
 					}
@@ -122,8 +148,8 @@ public class ReadXsl {
 							cell.setCellValue(metric1);
 							// System.out.println(tipo);
 						} else if (gerador == 3) {
-							gerador = 2;
-							cell.setCellValue("falta");
+							//gerador = 2;
+							cell.setCellValue(metric1);
 						}
 
 					} else if (  cell.getColumnIndex() == 19) {
@@ -135,8 +161,8 @@ public class ReadXsl {
 							cell.setCellValue(metric2);
 							// System.out.println(tipo);
 						} else if (gerador == 3) {
-							gerador = 2;
-							cell.setCellValue("falta");
+							//gerador = 2;
+							cell.setCellValue(metric2);
 						}
 
 					} else if (  cell.getColumnIndex() == 20) {
@@ -148,8 +174,8 @@ public class ReadXsl {
 							cell.setCellValue(metric3);
 							// System.out.println(tipo);
 						} else if (gerador == 3) {
-							gerador = 2;
-							cell.setCellValue("falta");
+							//gerador = 2;
+							cell.setCellValue(metric3);
 						}
 
 					}
