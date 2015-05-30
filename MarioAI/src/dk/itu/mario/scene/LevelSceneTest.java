@@ -79,16 +79,47 @@ public class LevelSceneTest extends LevelScene {
 				//currentLevel = (Level) level.generateLevel(gp);		
 				
 				
-				
+				//test gral
 				ReadXsl objRead=new ReadXsl();
 				objRead.reading(320, 15, levelSeed, levelDifficulty, levelType);
+				objRead.compresionDistance(320, 15, levelSeed, levelDifficulty, levelType);
 			    currentLevel = LevelGenerator.createLevel(320, 15, levelSeed, levelDifficulty, levelType);
 			    //System.out.println("El width é"+currentLevel.getWidth());
+			    //test individual
 				//Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
 				//objMetrics.MetricsCalc(1);
 				//objMetrics.MetricsCalc(2);
 				//objMetrics.MetricsCalc(3);
 				//objMetrics.MetricsCalc(4);
+			    
+			    
+			    /*test metric4
+				String delimitadores = "\\s+";
+				String[] cadenasSeparadas;
+				
+				String telas="tela971 tela119 tela593 tela56 tela1232 tela1474 tela140 tela985 ";
+				cadenasSeparadas = telas.split(delimitadores);
+				currentLevel = LevelGenerator.createLevelMetrics(
+						320, 15, levelSeed, levelDifficulty, levelType, 0,
+						cadenasSeparadas);
+				Level currentLevel2;
+				try {
+					currentLevel2=currentLevel.clone();
+				} catch (CloneNotSupportedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String telas2="tela1825 tela38 tela1788 tela2043 tela1622 tela1232 tela43 tela2488 ";
+				cadenasSeparadas = telas2.split(delimitadores);
+				currentLevel2 = LevelGenerator.createLevelMetrics(
+						320, 15, levelSeed, levelDifficulty, levelType, 0,
+						cadenasSeparadas);
+			    //System.out.println("El width é"+currentLevel.getWidth());
+				Metrics objMetrics=new Metrics(currentLevel.getWidth(), currentLevel.getHeight(), currentLevel);
+				//objMetrics.MetricsCalc(1);
+				//objMetrics.MetricsCalc(2);
+				//objMetrics.MetricsCalc(3);
+				objMetrics.MetricsCalc(4,currentLevel2);*/
 			} else
 				currentLevel = new RandomLevel(320, 15, levelSeed, levelDifficulty, levelType);
 				

@@ -666,6 +666,7 @@ public class Generator {
     holepunch:
     while (nGaps < gapQuota) {
       boolean[] gaps = { true, true, true, true, true, true, true };
+      nGaps++;
       int gx = 12 + (int) (Math.random() * (level.getWidth() - 24));
       int spriteType = 0;
       for (int y = 0; y < level.getHeight(); ++y) {
@@ -698,7 +699,7 @@ public class Generator {
         level.setBlock(gx + 3, y, (byte) 0);
         level.setBlock(gx + 4, y, (byte) 0);
       }
-      nGaps += 1;
+      
     }
   }
 

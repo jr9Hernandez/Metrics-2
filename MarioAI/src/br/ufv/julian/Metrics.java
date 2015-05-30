@@ -24,17 +24,18 @@ public class Metrics extends LevelGenerator {
 
 
 	
-	public double MetricsCalc(int metric) {
+	public double MetricsCalc(int metric, Level toCompare) {
 
-		
+		/*		
 		Level leveltoCompare = new Level();
 		try {
 			leveltoCompare=level.clone();
+			leveltoCompare=toCompare;
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-/*
+
     	leveltoCompare.setSpriteTemplate(0, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
     	leveltoCompare.setSpriteTemplate(6, 6, new SpriteTemplate(SpriteTemplate.GREEN_TURTLE, true));
     	leveltoCompare.setSpriteTemplate(12, 6, new SpriteTemplate(SpriteTemplate.CANNON_BALL, true));
@@ -70,7 +71,7 @@ public class Metrics extends LevelGenerator {
 			Metric3 objMetric3= new Metric3(width, height, level);
 			return objMetric3.Metric3M();		
 	    case 4:
-		    Metric4 objMetric4= new Metric4(width, height, level, leveltoCompare);
+		    Metric4 objMetric4= new Metric4(width, height, level, toCompare);
 		    return objMetric4.Metric4M();
 
 		}

@@ -87,22 +87,49 @@ public class Metric4 {
 
 	public String countOtherElements(byte[][] array, Level lvl) {
 		String str = "";
+		int change=0;
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < array[i].length; j++) {
 
 				if (array[i][j] == (byte) (2 + 8 * 16)) {// RIGHT_UP_GRASS_EDGE
-					str = str + String.valueOf(j);
+					
+					if(j!=change)
+					{
+						change=j;
+						str = str + String.valueOf(2);
+					}
+					else
+					{
+						str = str + String.valueOf(1);
+					}
 					break;
 
 				} else if (array[i][j] == (byte) (0 + 8 * 16)) {// LEFT_UP_GRASS_EDGE
-					str = str + String.valueOf(j);
+					if(j!=change)
+					{
+						change=j;
+						str = str + String.valueOf(2);
+					}
+					else
+					{
+						str = str + String.valueOf(1);
+					}
 					break;
 
 				} else if (array[i][j] == (byte) (1 + 8 * 16)) {// HILL_TOP_W
-					str = str + String.valueOf(j);
+					if(j!=change)
+					{
+						change=j;
+						str = str + String.valueOf(2);
+					}
+					else
+					{
+						str = str + String.valueOf(1);
+					}
 					break;
 				}
 				if (j == (array[i].length) - 1) {
+					change=0;
 					str = str + String.valueOf(0);
 				}
 			}
