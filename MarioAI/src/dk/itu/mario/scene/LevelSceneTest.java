@@ -82,7 +82,7 @@ public class LevelSceneTest extends LevelScene {
 				//test gral
 				ReadXsl objRead=new ReadXsl();
 				objRead.reading(320, 15, levelSeed, levelDifficulty, levelType);
-				objRead.compresionDistance(320, 15, levelSeed, levelDifficulty, levelType);
+				//objRead.compresionDistance(320, 15, levelSeed, levelDifficulty, levelType);
 			    currentLevel = LevelGenerator.createLevel(320, 15, levelSeed, levelDifficulty, levelType);
 			    //System.out.println("El width é"+currentLevel.getWidth());
 			    //test individual
