@@ -9,7 +9,7 @@ public class Metric1  {
 	private int height;
 	Level level;
 	
-	private double[] levelElements = new double[5];
+	private double[] levelElements = new double[5]; 
 	private static final int levelElementsGaps = 0;
 	private static final int levelElementsAvGaps = 1;
 	private static final int levelElementsEnemies = 2;
