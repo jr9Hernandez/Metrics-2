@@ -7,7 +7,7 @@ public class Metric1  {
 	
 	private int width;
 	private int height;
-	Level level;
+	Level level; 
 	//lastcom2
 	private double[] levelElements = new double[5]; 
 	private static final int levelElementsGaps = 0;
