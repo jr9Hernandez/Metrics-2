@@ -5,7 +5,7 @@ import dk.itu.mario.level.Level;
 
 public class Metric1  {
 	
-	private int width;
+	private int width; 
 	private int height;
 	Level level; 
 	//lastcom2
