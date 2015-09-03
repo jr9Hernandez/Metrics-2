@@ -2,7 +2,7 @@ package br.ufv.julian;
 
 import dk.itu.mario.level.Level;
 
-public class Metric2 {
+public class Metric2 { 
 
 	private int width;
 	private int height;
